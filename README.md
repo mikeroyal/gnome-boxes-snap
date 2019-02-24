@@ -4,7 +4,7 @@
  Geary
 </h1>
 
-<p align="center"><b>This is the snap for Geary, an email application built around conversations, for the GNOME 3 desktop.It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
+<p align="center"><b>This is the snap for Geary, an email application built around conversations, for the GNOME 3 desktop. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
 <p align="center">
@@ -13,7 +13,7 @@
 -->
 
 
-![my-snap-name](https://user-images.githubusercontent.com/45159366/53297369-e2d85900-37d2-11e9-9d54-c8d9c5fdc38c.jpeg?raw=true "my-snap-name")
+![my-snap-name](https://user-images.githubusercontent.com/45159366/53297608-7ca10580-37d5-11e9-9ada-4b352a5386eb.png?raw=true "my-snap-name")
 
 <p align="center">Published for <img src="https://raw.githubusercontent.com/anythingcodes/slack-emoji-for-techies/gh-pages/emoji/tux.png" align="top" width="24" /> with 💝 by Snapcrafters</p>
 

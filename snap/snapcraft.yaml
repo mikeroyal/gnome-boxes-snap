@@ -25,7 +25,8 @@ geary:
     source: https://github.com/GNOME/geary.git
     source-type: git
     override-pull: |
-      snapcraftctl pull
+     git clone https://github.com/GNOME/geary.git src/github.com/GNOME/geary
+       cd src/github.com/GNOME/geary
       last_committed_tag="$(git describe --tags --abbrev=0)"
       last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
       last_released_tag="$(snap info $SNAPCRAFT_PROJECT_NAME | awk '$1 == "beta:" { print $2 }')"
@@ -36,6 +37,16 @@ geary:
         git checkout "${last_committed_tag}"
       fi
       snapcraftctl set-version "$(git describe --tags | sed 's/v//')"
+      override-build: |
+      export GOPATH=$PWD
+      cd src/github.com/GNOME/geary
+      env CGO_ENABLED=0 GOOS=linux \
+      go build --ldflags "-s -w \
+        -X 'github.com/GNOME/geary/version.GitCommit=$(git rev-list -1 HEAD)' \
+        -X 'github.com/GNOME/geary/version.Version=$(git describe --tags --abbrev=0)'" \
+        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/geary
+    build-snaps:
+      - vala
     build-packages:
       - git
-      - sed
+- sed

@@ -49,4 +49,4 @@ geary:
       - vala
     build-packages:
       - git
-- sed
+      - sed

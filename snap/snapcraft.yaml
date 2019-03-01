@@ -1,6 +1,6 @@
 name: timeshift
-summary: a system restore tool for Linux. 
-description: Geary is an email application built around conversations, for the GNOME 3 desktop.
+summary: System restore tool. 
+description: A system restore tool for Linux. 
   
 adopt-info: devmode # use 'strict' once you have the right plugs and slots
 
@@ -18,6 +18,7 @@ apps:
     plugs:
       - home
       - network
+      - removable-media
 
 parts:
 timeshift:

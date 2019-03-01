@@ -1,10 +1,10 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/45159366/53297368-e1a72c00-37d2-11e9-9a92-dd8df526821a.png">
+  <img src="https://user-images.githubusercontent.com/45159366/53624737-1e4d9b80-3bb6-11e9-88ab-e200ac00cf1c.png">
   <br />
- Geary
+ Timeshift
 </h1>
 
-<p align="center"><b>This is the snap for Geary, an email application built around conversations, for the GNOME 3 desktop. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
+<p align="center"><b>This is the snap for Timeshift, a system restore tool for Linux. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
 <p align="center">
@@ -13,13 +13,13 @@
 -->
 
 
-![my-snap-name](https://user-images.githubusercontent.com/45159366/53297608-7ca10580-37d5-11e9-9ada-4b352a5386eb.png?raw=true "my-snap-name")
+![my-snap-name](https://user-images.githubusercontent.com/45159366/53624739-20175f00-3bb6-11e9-931a-282c3e23c490.png?raw=true "my-snap-name")
 
 <p align="center">Published for <img src="https://raw.githubusercontent.com/anythingcodes/slack-emoji-for-techies/gh-pages/emoji/tux.png" align="top" width="24" /> with 💝 by Snapcrafters</p>
 
 ## Install
 
-    sudo snap install geary
+    sudo snap install timeshift
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 

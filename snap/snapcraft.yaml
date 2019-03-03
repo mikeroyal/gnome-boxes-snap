@@ -1,6 +1,6 @@
-name: timeshift
-summary: System restore tool. 
-description: A system restore tool for Linux. 
+name: digikam
+summary:  Advanced digital photo management. 
+description: Makes importing and organizing digital photos a 'snap'.
   
 adopt-info: devmode # use 'strict' once you have the right plugs and slots
 
@@ -13,21 +13,21 @@ architectures:
   - build-on: arm64
 
 apps:
-  timeshift:
-    command: bin/timeshift
+  digikam:
+    command: bin/digikam
     plugs:
       - home
       - network
       - removable-media
 
 parts:
-timeshift:
+digikam:
     plugin: 
-    source: https://github.com/teejee2008/timeshift.git
+    source: https://github.com/KDE/digikam.git
     source-type: git
     override-pull: |
-     git clone https://github.com/teejee2008/timeshift.git src/github.com/teejee2008/timeshift
-       cd src/github.com/teejee2008/timeshift
+     git clone https://github.com/KDE/digikam.git src/github.com/KDE/digikam
+       cd src/github.com/KDE/digikam
       last_committed_tag="$(git describe --tags --abbrev=0)"
       last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
       last_released_tag="$(snap info $SNAPCRAFT_PROJECT_NAME | awk '$1 == "beta:" { print $2 }')"
@@ -40,14 +40,14 @@ timeshift:
       snapcraftctl set-version "$(git describe --tags | sed 's/v//')"
       override-build: |
       export GOPATH=$PWD
-      cd src/github.com/teejee2008/timeshift
+      cd src/github.com/KDE/digikam
       env CGO_ENABLED=0 GOOS=linux \
       go build --ldflags "-s -w \
-        -X 'github.com/teejee2008/timeshift/version.GitCommit=$(git rev-list -1 HEAD)' \
-        -X 'github.com/teejee2008/timeshift/version.Version=$(git describe --tags --abbrev=0)'" \
-        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/timeshift
+        -X 'github.com/KDE/digikam/version.GitCommit=$(git rev-list -1 HEAD)' \
+        -X 'github.com/KDE/digikam/version.Version=$(git describe --tags --abbrev=0)'" \
+        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/digikam
     build-snaps:
-      - vala
+      - 
     build-packages:
       - git
       - sed

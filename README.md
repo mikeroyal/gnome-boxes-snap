@@ -1,10 +1,10 @@
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/45159366/53692688-343f9580-3d49-11e9-8e7b-384b5dedaa3c.png">
+  <img src="https://user-images.githubusercontent.com/45159366/53721225-8353fc00-3e17-11e9-9f1e-9bea72bc13f5.png">
   <br />
- digiKam
+ GNOME Boxes
 </h1>
 
-<p align="center"><b>This is the snap for digiKam, an advanced digital photo management application for KDE. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
+<p align="center"><b>This is the snap for GNOME Boxes, aan application of the GNOME Desktop Environment, used to access remote or virtual systems. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
 <p align="center">
@@ -12,7 +12,7 @@
 </p>
 -->
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/45159366/53692689-3570c280-3d49-11e9-89f8-ad06bb56992e.png">
+  <img src="https://user-images.githubusercontent.com/45159366/53721228-851dbf80-3e17-11e9-9dc1-3c9a504dfc86.png">
   <br />
 </h1>
 
@@ -20,7 +20,7 @@
 
 ## Install
 
-    sudo snap install digikam
+    sudo snap install gnome-boxes
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 

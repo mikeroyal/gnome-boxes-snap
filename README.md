@@ -4,7 +4,7 @@
  GNOME Boxes
 </h1>
 
-<p align="center"><b>This is the snap for GNOME Boxes, aan application of the GNOME Desktop Environment, used to access remote or virtual systems. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
+<p align="center"><b>This is the snap for GNOME Boxes, an application of the GNOME Desktop Environment, used to access remote or virtual systems. It works on Ubuntu, Fedora, Debian, and other major Linux distributions. </p>
 
 <!-- Uncomment and modify this when you are provided a build status badge
 <p align="center">

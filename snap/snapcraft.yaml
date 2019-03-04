@@ -1,6 +1,6 @@
-name: digikam
-summary:  Advanced digital photo management. 
-description: Makes importing and organizing digital photos a 'snap'.
+name: gnome-boxes
+summary: GNOME 3 application to access remote or virtual systems. 
+description: an application of the GNOME Desktop Environment, used to access remote or virtual systems.
   
 adopt-info: devmode # use 'strict' once you have the right plugs and slots
 
@@ -13,21 +13,21 @@ architectures:
   - build-on: arm64
 
 apps:
-  digikam:
-    command: bin/digikam
+  gnome-boxes:
+    command: bin/gnome-boxes
     plugs:
       - home
       - network
       - removable-media
 
 parts:
-digikam:
+gnome-boxes:
     plugin: 
-    source: https://github.com/KDE/digikam.git
+    source: https://github.com/GNOME/gnome-boxes.git
     source-type: git
     override-pull: |
-     git clone https://github.com/KDE/digikam.git src/github.com/KDE/digikam
-       cd src/github.com/KDE/digikam
+     git clone https://github.com/GNOME/gnome-boxes.git src/github.com/GNOME/gnome-boxes
+       cd src/github.com/GNOME/gnome-boxes
       last_committed_tag="$(git describe --tags --abbrev=0)"
       last_committed_tag_ver="$(echo ${last_committed_tag} | sed 's/v//')"
       last_released_tag="$(snap info $SNAPCRAFT_PROJECT_NAME | awk '$1 == "beta:" { print $2 }')"
@@ -40,14 +40,14 @@ digikam:
       snapcraftctl set-version "$(git describe --tags | sed 's/v//')"
       override-build: |
       export GOPATH=$PWD
-      cd src/github.com/KDE/digikam
+      cd src/github.com/GNOME/gnome-boxes
       env CGO_ENABLED=0 GOOS=linux \
       go build --ldflags "-s -w \
-        -X 'github.com/KDE/digikam/version.GitCommit=$(git rev-list -1 HEAD)' \
-        -X 'github.com/KDE/digikam/version.Version=$(git describe --tags --abbrev=0)'" \
-        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/digikam
+        -X 'github.com/GNOME/gnome-boxes/version.GitCommit=$(git rev-list -1 HEAD)' \
+        -X 'github.com/GNOME/gnome-boxes/version.Version=$(git describe --tags --abbrev=0)'" \
+        -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/gnome-boxes
     build-snaps:
-      - 
+      - vala
     build-packages:
       - git
       - sed

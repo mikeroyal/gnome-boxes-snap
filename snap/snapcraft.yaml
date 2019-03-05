@@ -11,6 +11,22 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
+  
+  parts:
+  magic:
+    plugin: nil
+    build-environment: &buildenv
+      - PATH: $PATH:$SNAPCRAFT_STAGE/usr/bin
+      - XDG_DATA_DIRS: $XDG_DATA_DIRS:$SNAPCRAFT_STAGE/usr/share:/usr/share
+      - PKG_CONFIG_PATH: $SNAPCRAFT_STAGE/pkgconfig-build
+      - ACLOCAL_PATH: $SNAPCRAFT_STAGE/usr/share/aclocal
+      - GI_TYPELIB_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0:/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/girepository-1.0
+      - VAPIDIR: $SNAPCRAFT_STAGE/usr/share/vala/vapi:$SNAPCRAFT_STAGE/usr/share/vala-0.40/vapi:$SNAPCRAFT_STAGE/usr/share/vala-0.36/vapi:$SNAPCRAFT_STAGE/usr/share/vala-0.30/vapi
+      - VALAFLAGS: " --vapidir $SNAPCRAFT_STAGE/usr/share/vala/vapi $SNAPCRAFT_STAGE/usr/share/vala-0.40/vapi $SNAPCRAFT_STAGE/usr/share/vala-0.36/vapi $SNAPCRAFT_STAGE/usr/share/vala-0.30/vapi"
+      - LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAPCRAFT_STAGE/usr/lib/vala-0.40
+      - CMAKE_PREFIX_PATH: $CMAKE_PREFIX_PATH:$SNAPCRAFT_STAGE
+      - CMAKE_INCLUDE_PATH: $CMAKE_INCLUDE_PATH:$SNAPCRAFT_STAGE/include:$SNAPCRAFT_STAGE/usr/include
+      - CMAKE_LIBRARY_PATH: $CMAKE_LIBRARY_PATH:$SNAPCRAFT_STAGE/lib:$SNAPCRAFT_STAGE/usr/lib:$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
 
 apps:
   gnome-boxes:

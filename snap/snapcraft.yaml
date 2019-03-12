@@ -1,4 +1,5 @@
 name: gnome-boxes
+version: 3.30.2
 summary: GNOME 3 application to access remote or virtual systems. 
 description: an application of the GNOME Desktop Environment, used to access remote or virtual systems.
   
@@ -11,6 +12,23 @@ architectures:
   - build-on: amd64
   - build-on: armhf
   - build-on: arm64
+  plugs:
+  gnome-3-28-1804:
+    interface: content
+    target: $SNAP/gnome-platform
+    default-provider: gnome-3-28-1804
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
   
   parts:
   magic:
@@ -63,7 +81,130 @@ gnome-boxes:
         -X 'github.com/GNOME/gnome-boxes/version.Version=$(git describe --tags --abbrev=0)'" \
         -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/gnome-boxes
     build-snaps:
-      - vala
+      - 
     build-packages:
       - git
       - sed
+      - g++
+      - make
+      - libsdl1.2-dev
+      - libpng-dev
+      - libsdl-net1.2-dev
+      - libsdl-sound1.2-dev
+      - libasound2-dev
+    stage-packages:
+      - libsdl-sound1.2
+      - libsdl-net1.2
+      - libxcursor1
+      - libxi6
+      - libxinerama1
+      - libxrandr2
+      - libxrender1
+      - libopenal1
+      - libsndio6.1
+      - libspeex1
+      - libvorbisfile3
+      - libwayland-client0
+      - libwayland-cursor0
+      - libwayland-egl1-mesa
+      - libxkbcommon0
+      - libglu1-mesa
+      - libasound2
+      - libasyncns0
+      - libbsd0
+      - libcaca0
+      - libdbus-1-3
+      - libflac8
+      - libgcc1
+      - libgcrypt20
+      - libgl1
+      - libglvnd0
+      - libglx0
+      - libgpg-error0
+      - liblz4-1
+      - liblzma5
+      - libncursesw5
+      - libogg0
+      - libpng16-16
+      - libpulse0
+      - libsdl1.2debian
+      - libslang2
+      - libsndfile1
+      - libstdc++6
+      - libsystemd0
+      - libtinfo5
+      - libvorbis0a
+      - libvorbisenc2
+      - libwrap0
+      - libx11-6
+      - libxau6
+      - libxcb1
+      - libxdmcp6
+      - libxext6
+      - zlib1g
+
+ gobject-introspection:
+    after: [glib, cairo]
+    source: https://gitlab.gnome.org/GNOME/gobject-introspection.git
+    #source-branch: gnome-3-28
+    plugin: autotools
+    configflags: [ --prefix=/usr, --with-python=python3 ]
+    build-environment: *buildenv
+    override-build: |
+      set -eux
+      snapcraftctl build
+      SCANNER=$SNAPCRAFT_PART_INSTALL/usr/bin/g-ir-scanner
+      mkdir -p $SNAPCRAFT_STAGE/usr/bin
+      cp $SCANNER $SNAPCRAFT_STAGE/usr/bin/g-ir-scanner.orig
+      sed -i 's#/usr/lib#$SNAPCRAFT_STAGE/usr/lib#' $SCANNER
+      sed -i 's#/usr/share#$SNAPCRAFT_STAGE/usr/share#' $SCANNER
+      PKGCONFIG_BUILD=$SNAPCRAFT_STAGE/pkgconfig-build
+      mkdir -p $PKGCONFIG_BUILD
+      PC=gobject-introspection-1.0.pc
+      SRC=$SNAPCRAFT_PART_INSTALL/usr/lib/pkgconfig/$PC
+      DST=$PKGCONFIG_BUILD/$PC
+      cp $SRC $DST
+      sed -i 's#^prefix=#prefix=$SNAPCRAFT_STAGE#' $DST
+    build-packages:
+      - python3-dev
+      - libffi-dev
+      - python3-mako
+      - bison
+      - flex
+    
+  glib:
+    source: https://gitlab.gnome.org/GNOME/glib.git
+    source-branch: glib-2-58
+    configflags: [ --prefix=/usr ]
+    plugin: autotools
+    build-environment: *buildenv
+    override-build: |
+      set -eux
+      snapcraftctl build
+      PKGCONFIG_BUILD=$SNAPCRAFT_STAGE/pkgconfig-build
+      mkdir -p $PKGCONFIG_BUILD
+      PC=glib-2.0.pc
+      SRC=$SNAPCRAFT_PART_INSTALL/usr/lib/pkgconfig/$PC
+      DST=$PKGCONFIG_BUILD/$PC
+      cp $SRC $DST
+      sed -i 's#libdir=#libdir=$SNAPCRAFT_STAGE#' $DST
+      sed -i 's#includedir=#includedir=$SNAPCRAFT_STAGE#' $DST
+    build-packages:
+      - automake
+      - autoconf
+      - autotools-dev
+      - libtool
+      - libmount-dev
+
+  desktop-gnome-platform:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    plugin: make
+    make-parameters: ["FLAVOR=gtk3"]
+    build-packages:
+      - build-essential
+      - libgtk-3-dev
+    override-build: |
+      snapcraftctl build
+      mkdir -pv $SNAPCRAFT_PART_INSTALL/gnome-platform
+     

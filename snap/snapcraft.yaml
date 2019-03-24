@@ -1,5 +1,5 @@
 name: gnome-boxes
-version: 3.30.2
+version: git
 summary: GNOME 3 application to access remote or virtual systems. 
 description: an application of the GNOME Desktop Environment, used to access remote or virtual systems.
   

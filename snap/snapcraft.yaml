@@ -2,8 +2,6 @@ name: gnome-boxes
 version: git
 summary: GNOME 3 application to access remote or virtual systems. 
 description: an application of the GNOME Desktop Environment, used to access remote or virtual systems.
-  
-adopt-info: devmode # use 'strict' once you have the right plugs and slots
 
 grade: stable
 confinement: devmode
@@ -13,10 +11,10 @@ architectures:
   - build-on: armhf
   - build-on: arm64
   plugs:
-  gnome-3-28-1804:
+  gnome-3-32-1804:
     interface: content
     target: $SNAP/gnome-platform
-    default-provider: gnome-3-28-1804
+    default-provider: gnome-3-32-1804
   gtk-3-themes:
     interface: content
     target: $SNAP/data-dir/themes

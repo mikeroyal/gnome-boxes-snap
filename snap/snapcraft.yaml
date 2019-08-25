@@ -5,11 +5,11 @@ description: an application of the GNOME Desktop Environment, used to access rem
 
 grade: stable
 confinement: devmode
+base: core18
 
 architectures:
   - build-on: amd64
-  - build-on: armhf
-  - build-on: arm64
+
   plugs:
   gnome-3-32-1804:
     interface: content
@@ -78,8 +78,7 @@ gnome-boxes:
         -X 'github.com/GNOME/gnome-boxes/version.GitCommit=$(git rev-list -1 HEAD)' \
         -X 'github.com/GNOME/gnome-boxes/version.Version=$(git describe --tags --abbrev=0)'" \
         -a -installsuffix cgo -o $SNAPCRAFT_PART_INSTALL/bin/gnome-boxes
-    build-snaps:
-      - 
+    
     build-packages:
       - git
       - sed
@@ -90,6 +89,7 @@ gnome-boxes:
       - libsdl-net1.2-dev
       - libsdl-sound1.2-dev
       - libasound2-dev
+      
     stage-packages:
       - libsdl-sound1.2
       - libsdl-net1.2
@@ -144,7 +144,6 @@ gnome-boxes:
  gobject-introspection:
     after: [glib, cairo]
     source: https://gitlab.gnome.org/GNOME/gobject-introspection.git
-    #source-branch: gnome-3-28
     plugin: autotools
     configflags: [ --prefix=/usr, --with-python=python3 ]
     build-environment: *buildenv
